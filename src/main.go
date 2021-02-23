@@ -17,6 +17,9 @@ func main() {
 	//r.POST("/app/v1/update", wafLog.UpdateLog)
 	r.GET("/log/v1/selectById", wafLog.RetrieveLog)
 	r.GET("/log/v1/selectAll", wafLog.RetrieveAll)
+	r.GET("/waf/v1/start", wafLog.WafStart)
+	r.GET("/waf/v1/stop", wafLog.WafStop)
+	r.GET("/waf/v1/restart", wafLog.WafRestart)
 	//r.POST("/app/v1/delete", wafLog.DeleteLog)
 
 	go func() {
@@ -32,13 +35,12 @@ func main() {
 	<-quit
 	log.Println("Shutdown Server ...")
 
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 	select {
 	case <-ctx.Done():
 		log.Println("timeout of 5 seconds.")
 	}
 	log.Println("Server exiting")
-
 
 }
