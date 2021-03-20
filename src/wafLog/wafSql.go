@@ -7,16 +7,17 @@ import (
 )
 
 type LogDB struct {
-	Id   string    `db:"id"`
-	LogPath string `db:"path"`
+	Id        string `db:"id"`
+	LogPath   string `db:"path"`
 	Timestamp string `db:"timestamp"`
 }
 
 var Db *sqlx.DB
 
-func init(){
-	database, err := sqlx.Open("mysql", "root:12345678@tcp(127.0.0.1:3306)/waf")
-	//database, err := sqlx.Open("mysql", "root:root@tcp(127.0.0.1:3306)/log")
+//caonima
+func init() {
+	//database, err := sqlx.Open("mysql", "root:12345678@tcp(127.0.0.1:3306)/waf")
+	database, err := sqlx.Open("mysql", "root:root@tcp(127.0.0.1:3306)/log")
 	if err != nil {
 		fmt.Println("open mysql failed,", err)
 		return
@@ -39,17 +40,17 @@ func init(){
 //	fmt.Println("insert succ:", id)
 //}
 
-func Select(id string) ([]LogDB,error){
+func Select(id string) ([]LogDB, error) {
 	var log []LogDB
 	fmt.Println(id)
 	err := Db.Select(&log, "select id, path, timestamp from log where id=?", id)
-	return log,err
+	return log, err
 }
 
-func SelectAll() ([]LogDB,error){
+func SelectAll() ([]LogDB, error) {
 	var log []LogDB
 	err := Db.Select(&log, "select id, path, timestamp from log")
-	return log,err
+	return log, err
 }
 
 //func Update(l LogDB){
@@ -79,7 +80,7 @@ func SelectAll() ([]LogDB,error){
 //	fmt.Println("delete succ: ",row)
 //}
 
-func Close()  {
+func Close() {
 	fmt.Println("Close DB")
 	Db.Close()
 }
