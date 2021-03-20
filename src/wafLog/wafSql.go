@@ -14,7 +14,7 @@ type LogDB struct {
 
 var Db *sqlx.DB
 
-//caonimacaoca
+//caonimacaoca擦擦
 func init() {
 	//database, err := sqlx.Open("mysql", "root:12345678@tcp(127.0.0.1:3306)/waf")
 	database, err := sqlx.Open("mysql", "root:root@tcp(127.0.0.1:3306)/log")
